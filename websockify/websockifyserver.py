@@ -375,7 +375,7 @@ class WebSockifyServer():
 
         if self.web:
             os.chdir(self.web)
-        self.only_upgrade = not self.web
+        self.only_upgrade = False # not self.web
 
         # Sanity checks
         if not ssl and self.ssl_only:
