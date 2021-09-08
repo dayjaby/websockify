@@ -14,6 +14,7 @@ as taken from http://docs.python.org/dev/library/ssl.html#certificates
 
 import os, sys, time, errno, signal, socket, select, logging
 import multiprocessing
+import traceback
 from http.server import SimpleHTTPRequestHandler
 
 # Degraded functionality if these imports are missing
@@ -668,8 +669,8 @@ class WebSockifyServer():
             except WebSockifyServer.Terminate:
                 raise
             except Exception:
-                _, exc, _ = sys.exc_info()
-                self.msg("handler exception: %s" % str(exc))
+                exc = traceback.format_exc()
+                self.msg(exc)
                 self.vmsg("exception", exc_info=True)
         finally:
 
@@ -814,8 +815,8 @@ class WebSockifyServer():
 
                         break
                     except Exception:
-                        exc = sys.exc_info()[1]
-                        self.msg("handler exception: %s", str(exc))
+                        exc = traceback.format_exc()
+                        self.msg(exc)
                         self.vmsg("exception", exc_info=True)
 
                 finally:
