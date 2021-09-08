@@ -76,7 +76,7 @@ class BaseTokenAPI(BasePlugin):
     def lookup(self, token):
         import requests
 
-        resp = requests.get(self.source % token, verify=False)
+        resp = requests.get(self.source.format(token=token), verify=False)
 
         if resp.ok:
             return self.process_result(resp)
